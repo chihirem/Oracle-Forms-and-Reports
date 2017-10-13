@@ -1,0 +1,1065 @@
+Steps to Create a Form thru Wizards
+In the object navigator, being on Forms, Click (+) or File, New Form.
+
+Save the file as F1FormThruWizard and Name the form module in object navigator as "Emp". In case, you name the Form module first, and then save the file, then the name in the Object navigator, becomes the default the file name.
+
+In ON, click Data Block, and click (+) or Tools,Data Block Wizard. Go thru the steps, after which the Layout Wizard is automatically invoked.Go thru the Layout Wizard. Select layout as Form. Set the Frame Title as "Emp Details"
+
+Save the Form , and Run it thru CTRL+R or Program, Run Form.
+
+Close the Form thru File, Close
+
+-------------------------------------------------------------
+
+
+Steps to create a form manually
+
+In the object navigator, being on Forms, Click (+) forms or File, New Form.
+
+Save the file as F2FormManual and Name the form module in object navigator as "Emp".
+
+In ON, click Data Block, and click (+), and select the option "Build a Data Block manually". Set the following properties of the newly created block as follows :
+	name : EMPBLOCK
+	Database Data Block : Yes
+	Query Data Source Type : Table
+	Query Data Source Name : Emp
+
+In ON, click Canvases, and click (+) and name the Canvas as "EMPCANVAS"
+
+Under EMPBLOCK, click Items, click (+), and set the following properties :
+	Name : MYEMPNO
+	Data Type : Number
+	Column Name : empno
+	Prompt : Employee Number
+	Canvas : EMPCANVAS
+
+Under EMPBLOCK, click Items, click (+), and set the following properties :
+	Name : MYENAME
+	Data Type : char
+	Column Name : ename
+	Prompt : Employee Name
+	Canvas : EMPCANVAS
+
+
+Under EMPBLOCK, click Items, click (+), and set the following properties :
+	Name : MYSAL
+	Data Type : number
+	Column Name : sal
+	Prompt : Employee Saalary
+	Canvas : EMPCANVAS
+
+Under EMPBLOCK, click Items, click (+), and set the following properties :
+	Name : MYHIREDATE
+	Data Type : date
+	Column Name : hiredate
+	Prompt : Employee Hiredate
+	Canvas : EMPCANVAS
+
+Under EMPBLOCK, click Items, click (+), and set the following properties :
+	Name : MYDEPTNO
+	Data Type : number
+	Column Name : deptno
+	Prompt : Employee Deptno
+	Canvas : EMPCANVAS
+
+
+Under the EMPBLOCK, drag the item to decide their order : myempno, myename, mysal, myhiredate, mydeptno
+
+
+Double click EMPCANVAS, and aranage the items without any horizontal or vertical allignment on it as required
+
+Save the Form , and Run it thru CTRL+R or Program, Run Form.
+-------------------------------------------------------------------
+
+To show a form, where triggers are automatically created to enforce data integrity constraints
+create table newemp as select * from emp where 1=0;
+alter table newemp modify empno primary key;
+alter table newemp modify sal check(sal>=1000);
+alter table newemp modify deptno references dept(deptno);
+alter table newemp modify comm not null;
+alter table newemp modify job unique;
+
+insert into newemp values(100,'Tom','CLERK', null,'26-Aug-89',1000, 100, 10);
+insert into newemp values(200,'Peter','SALESMAN', 100,'02-Dec-95',1500, 540, 20);
+commit;
+
+Create a form thru data-block wizard and while specifying the table name as NEWEMP, check the check-box "Enforce Data Integrity". Then complete the data block wizard  and layout wizards. Save the form as F3DATAINTEGRITY.
+
+Under ON, under the items SAL and DEPTNO, you will notice that When-Validate-Item triggers are created to enforce the CHECK and FORIEGN KEY constraints respectively. For Primary key constraint on EMPNO, the item property "Primary Key" is set to Yes.
+
+Similary, try out for all constraints, with PK and FK in same table, and PK and FK in different tables.
+
+---------------------------------------------------------------------
+
+Steps to Create a MASTER-DETAILS Form thru Wizards
+
+In the object navigator, being on Forms, Click (+) forms or File, New Form.
+
+Save the file as F4MasterDetail and Name the form module in object navigator as "DEPTEMP".
+
+In ON, click Data Block, and click (+) or Tools,Data Block Wizard. Go thru the steps to create a data block for DEPT table, after which the Layout Wizard is automatically invoked. Go thru the Layout Wizard. Select layout as Form. Set the Frame Title as "Dept Details"
+
+Create another Data Block, and take the table as EMP, after selecting the EMP table, in the next step, click on "Create Relationships". The Master Data Block will be taken as DEPT. Under the "Detail item" select DEPTNO column of EMP table, and under the "Master Item" select DEPTNO column of DEPT table. Then go thru the balance steps of the Data Blcok Wizard and the steps of the Layout Wizard in which you display 4 records at a time, and take the scroll bar option.
+
+In a Master-Details form ensure that the Master block is before the Details block in the Object Navigator.
+
+-----------------------
+
+
+Aligning items on the canvas
+Open the Form "F2FormManual". Double click on the canvas to see all the items and their prompts. Drag the items to get them tentatively one below the other. Click on the prompts of each item to get the promts slightly away from the corresponding item. Select all the prompts together using the Shift button, and keeping them selected, select menu Layout, Align Components, and under Horizontally, select the option "Align Left". Similarly, now select all the items, and  align the using menu Layout, Align Components, and under Horizontally, select the option "Align Left". 
+
+Now, click on the prompts of each item and get them as close as possible to their respective items. Now, drag the items to get them tentatively on the same line. Select all the item using shift and clcik "Align Top.
+
+
+
+
+
+To Understand MDI Window, Window and Canvas
+Create a new form module, save it as F5FormToLearnWindow. Go thru the Data-Block wizard(taking the EMP table) and layout wizard.
+Under ON, under Windows, click the Window1 and name it as "MYWINDOW". Go to its properties and set the following properties :
+	X position:	500
+	Y Position:	500
+	Width :	2000
+	Height:	2000
+
+Then, save and Run the form to get the look and feel of the customizations you made
+
+Click the Window "MYWINDOW". Go to its properties and set the following properties :
+	X position:	0
+	Y Position:	0
+	Width :	20
+	Height:	20
+Then, save and Run the form to get the look and feel of the customizations you made
+
+
+
+Click the Window "MYWINDOW". Go to its properties and set the following properties :
+	X position:	500
+	Y Position:	500
+	Width :	100
+	Height:	100
+Then, save and Run the form to get the look and feel of the customizations you made
+
+Also, check how you can move the window and resize it within the MDI window at runtime.
+
+
+Click the Window "MYWINDOW". Go to its properties and set the following properties :
+	X position:	100
+	Y Position:	100
+	Width :	1000
+	Height:	1000
+	Show Horizontal scroll bar : Yes
+	Show Vertical scroll bar : Yes
+
+Then, save and Run the form to get the look and feel of the customizations you made
+
+To understand Master-Details Delete behaviour
+Create a Master-Details form with DEPT-EMP tables, and save it as F6MasterDetailDelete. Ensure that the Master Block is before the Details block. Under the Master block, under Relations, you will find the Dept_Emp relation, click on it and go the properties of the same. The default value for the property "Delete Recod Behaviour" = Non-isolated, which means cannot delete parent record when child records exist. If it is set to "Cascading" it means when parent row is deleted, then child rows get deleted. The third value is ISOLATED, which will work when there is no relationship between the two tables at the database level(that is drop the foreign key constraint on the deptno column of the emp table). After deleting the relationship, set the "Delete Recod Behaviour" = Isolated, now when you delete the parent row, the parent row gets deleted without affecting the child rows. If you try deleting the parent row with this property set(while the foreign key at the db level still existing, then you get an error saying "Unable the Delete Record" when you try to save)
+
+
+
+-----------------------------------------
+
+
+To understand Master-Details "Prevent Masterless Operation"
+Create a Master-Details form with DEPT-EMP tables, and save it as F7MasterDetailMasterless. Ensure that the Master Block is before the Details block. Under the Master block, under Relations, you will find the Dept_Emp relation, click on it and go the properties of the same. The default value for the property "Prevent Masterless Operation"=No, which means, in the Enter Query Mode, in the Job column of the EMP(child) block, if you key in the value 'CLERK' , and then click EXECUTE QUERY, it will show you the CLERKS of all the departments, that is, presence of no parent row is required while you are in the ENTER QUERY mode in the child block.
+
+For demonstration do the following :
+While being in the parent(dept block), go to the enter-query mode. In the deptno column, key in the value 10, and click Execute-query. It will show you the parent row in the parent block and the corresponding child rows in the emp block. Now, place your cursor in the emp block, and again click the ENTER-Query button. On doing so the row in the parent block which is deptno=10 still remains in the parent block, while the child block gets cleared and goes into the enter query mode. Now in the job column of emp(child) block, type the value "CLERK" in the Job text field of the 1st row, and press EXECUTE-QUERY. Now, it will show you only the CLERKS present in the deptno=10. 
+Now, click ACTION, CLEAR ALL which will clear data from both the blocks. Place the cursor in the child(emp) block and press Enter-query, then in the job column, type the value 'CLERK', press execute-query. It will show you CLERKS from all the departments, though the parent block is empty(showing no rows) as of now. This means "Allow Masterless Operation", that is "Prevent Masterless Operation"=No.
+
+Now, set the "Prevent Masterless Operation" = yes, and run the form again.
+Place the cursor in the child(emp) block and press Enter-query, it gives you an error saying that "You cannot query records without a saved parent record", which means without having a row in the parent block, you cannot query into the child block, as in the above case(where you could find out all the clerks regardless of the department) This means "Do Not Allow Masterless Operation", that is "Prevent Masterless Operation"=Yes.
+
+
+
+
+
+Master-Details on two separate content canvases
+Create a Master-Details form with DEPT-EMP tables, an
+d save it as F8MasterDetailon2canvas. While creating the child block, take a new canvas during the Layout wizard of the child block. On Running the form, it is noticed that at a time, you would be able to view either the Master Block data or the corresponding Child Block data, though both the canvases are on the same window. Thus, only one content canvas will be visible at a time, since one content canvas will overlap the other ones at runtime. 
+Hence, in this case we may adjust the Y-positions of the frame in the child block, to say 100, but that will just lower the display of the emp data in the window, but at a time u will be able to see only one contect canvas, hence u will see either the parent block or the child block.
+
+Master-Details on two separate windows
+Create a Master-Details form with DEPT-EMP tables, and save it as F9MasterDetailon2wins. After the Master block gets created, name it's window as DEPTWIN. Then create one more window and name it as EMPWIN. Now create the child block, and take a new canvas during it's layout wizard. After the child block is ready, ensure that the window property of the canvas of the child block is set to EMPWIN. Now save and run the form. During runtime you can actually view both the windows in the MDI(Multiple Document Interface) window. You may also move and resize both the windows to be able to view both the Master and Detail block in the two separate windows in the MDI window.
+
+
+
+
+LOV thru wizard 
+Create a data block for the EMP table thru the data block followed  by the Layout Wizard. Save the module as F10LOVTHRUWIZARD. Now, under ON, click LOVs, click (+) or Tools, LOV Wizard. Since no record group is available, the option "New Record Group Based on query" would be selected. In the next screen give the query "Select * from dept" or build the query from the BUILD SQL QUERY button. Check the syntax to verify, and go ahead. Select those columns from the List of RECORD GROUP COLUMNS, which you want to display as LOV columns. In this case we will take all. In the next step, you need to specify which column/item in the block will receive which LOV columns value. For this, place your cursor in the Return Value text area of deptno column and click on the button "Lookup Return Item", and then select EMP.DEPTNO from the list. This means that EMP.deptno will receive the LOV value retuned by the DEPTNo column from the LOV. Give the LOV title as "List of Department Numbers". In the next screen for Retrieve Records give the value as 2. In the next step, you will move the EMP.DEPTNO from the Return Items list to the Assigned Items list, which means that you are interetsed in actually showing the LOV for EMP.DEPTNO column. You will notice that a Record Group is created and also a LOV is created. Name them accordingly. Save the form and run it. At run time, when the focus moves to the deptno column, you get a hint at the botton "List of Values", press CTRL+L, to actually see the list of values
+
+
+
+
+LOV thru Button using Static Record Group
+Create a data block for the EMP table thru the data block wizard followed  by the Layout Wizard. Save the module as F11LOVWITHBUTTON. Under ON, click Record Groups and click on create(+) button. Then Select "Static Values". In the column names, given the column name as "JOB" and for this column in the column values give the following values CLERK, MANAGER, SALESMAN, PRESIDENT. Name this Record Group as JOBRECGRP. NOw, under ON, click LOVs, and click on Create(+) button, and select LOV wizard, take the Existing Record Group as JOBRECGRP. From the Record Group Columns take JOB as the LOV columns. For the return value of JOB, select the column emp.job using the button "Lookup Return Item". Take the title as "List of Jobs". Now, move emp.job from the Return Items to the Assigned Items list, to indicate the item(in this case emp.job) with which the LOV will appear. Name the LOV as JOBLOV. Now save and run the form. 
+
+Now let us put a button and popup the LOV on the click of the button. Double click the canvas and place a Push-Button from the toolbar on the canvas. Name the button as JOBLOVBTN and the label as "List of Jobs". Also, set the ENABLED property of the button JOBLOVBTN to NO.
+
+Right click on the button, go to Smart triggers and take the trigger When-Button-Pressed, and write the following code for it :
+
+declare
+	flag boolean;
+begin
+	flag:=show_lov('joblov');
+end;
+
+Right click on the JOB item, go to Smart triggers and take the trigger Pre-Text-Item, and write the following code for it :
+set_item_property('joblovbtn',enabled,property_true);
+
+Right click on the JOB item, go to Smart triggers and take the trigger Post-Text-Item, and write the following code for it :
+set_item_property('joblovbtn',enabled,property_false);
+
+The above two triggers will ensure that the button is enabled only when the focus is on the JOB item.
+
+
+
+
+
+LOV thru Static Record Group containing values for 2 columns : Job and grade
+Create the following table :
+create table myemp(empno number, ename varchar2(25), job varchar2(10), grade varchar2(2))
+/
+
+Add a few sample rows to it.
+
+Create a data block for the MYEMP table thru the data block wizard followed  by the Layout Wizard. Save the module as F12LOVWITH2colRECGRP. Under ON, click Record Groups and click on create(+) button. Then Select "Static Values". In the column names, given the column name as "JOB" and for this column in the column values give the following values CLERK,SALESMAN,MANAGER, PRESIDENT, OTHERS. Under column names give the second column as "GRADE" and for this column in the column values give the values as P0,P1,P2,P3. Name this Record Group as LOVRECGRP. NOw, under ON, click LOVs, and click on Create(+) button, and select LOV wizard, take the Existing Record Group as LOVRECGRP. From the Record Group Columns take JOB and GRADE as the LOV columns. For the return value of JOB, select the column myemp.job using the button "Lookup Return Item" and for the return value of GRADE, select the column myemp.grade using the the button "Lookup Return Item". Take the title as "List of Jobs - Grades". Continue ahead with the balance of steps. Name the LOV as JOBGRDLOV. Save and Run the Form. Add a few rows thru the form. What you notice is that when you take JOB as CLERK,SALESMAN,MANAGER, PRESIDENT, OTHERS, thru the LOV, you get the GRADES as P0,P1,P2,P3, NULL respectively and vice versa. However, manually while inserting or updating rows, you may take any combination or any data as per the requirement.
+
+
+
+
+
+
+LOV manually thru Static Record Group containing values for 2 columns : Job and Grade
+Create the following table :
+create table myemp(empno number, ename varchar2(25), job varchar2(10), grade varchar2(2))
+/
+
+Add a few sample rows to it.
+Create a data block for the MYEMP table thru the data block followed  by the Layout Wizard. Save the module as F13LOVMANUALWITH2colRECGRP. Under ON, click Record Groups and click on create(+) button. Then Select "Static Values". In the column names, given the column name as "JOB" and for this column in the column values give the following values CLERK,SALESMAN,MANAGER, PRESIDENT, OTHERS. Under column names give the second column as "GRADE" and for this column in the column names give the values as P0,P1,P2,P3. Name this Record Group as LOVRECGRP. NOw, under ON, click LOVs, and click on Create(+) button, and select the option to "Build a new LOV manually". In the properties of the newly created LOv set the following properties 
+	Name : JOBGRDLOV
+	Record Group : LOVRECGRP
+	
+Then click on the property "COLUMN MAPPING PROPRTIES" , and click on MORE. In the next dialog box, in the Column Names type JOB and set it's corresponding return item to MYEMP.JOB. Similarly, in the dialog box, for the second column name type GRADE and set it's corresponding return item to MYEMP.GRADE. The column names must be same as that set at the time of creating the record group. Click OK and save the form. Under the MYEMP data block, go to the JOB item and Grade item and set their "List of Values" property to JOBGRDLOV.
+
+
+
+RadioGroup
+Create a new form module and save it as F14RADIOGROUP. Under ON, click Canavs and click create (+). Name the canvas as MYCANVAS. Double click the canvas to open/display it. Click the Radio Button tool and draw a Radio button in the canvas. The moment the first Radio Button is drawn, a Radio Group automatically gets created. Under the radio group, click the Radio button just created and set the following properties : Name : R10, Label : Ten, Radio Button Value : 10. Under ON, click the Radio Group item under the block, and give it name MYRADIOGRP and set its property Initial Value =10 or R10(Initial value must match one of the radio buttons value or name). Now , go to the canvas again, and draw another Radio Button. On adding the second radio button it will ask you for the radiogroup. Take MYRADIOGRP, and do not click on NEW, as we want the two radio buttons to be part of the same radio group. Click the second Radio button just created and set the following properties : Name : R20, Label : Twenty, Radio Button Value : 20. Go to the Block,click Items, click create (+). Set its properies as follows : name : VALUEBOX, canvas : MYCANVAS, "Synchronize with item" : MYRADIOGRP
+
+
+
+
+RadioGroup for item/column of a table.
+Create a new form module for the EMP table using the Data block and Layout wizard and save it as F15RADIOGROUPDEPTNO. Under ON, click Data Blocks, and click create (+) and take the option "Build a new data block manually". Set the name of this new data block to CTRLBLOCK. Under CTRLBLOCK, click Items, click Create (+) to create a new Item, set its name=RGGRP, Item Type=Radio Group, Canvas=canvas4(the canvas on which the EMP items are placed), Initial Value=10. Under RGGRP, click Radio Buttons, and click Create (+) thrice to create 3 radio buttons. Name the three radio buttons as r10,r20,r30 and set their label to 10,20,30 and their radio Button Value to 10,20, 30 respectively. Double click the canvas, and adjsut the 3 Radio buttons on the canvas. Ensure that the Data Block EMP is before the Control Block CTRLBLOCK, or else u will have to click in the EMP block during runtime and then press Execute Query or else you will get an error "Function cannot be performed here", this is beacuse there is nothing like Enter Query/Execute Query for a control block.
+
+Go to the EMP data block, right click on it, Smart Triggers, and take When-New-Block_Instance and put the following code into it :
+set_item_property('rggrp', enabled, property_false);
+
+Go to the item DEPTNO under EMP block, right click, smart triggers and take Pre-Text-Item and put the following code into it :
+set_item_property('rggrp', enabled, property_true);
+
+Go to the EMP data block, right click on it, Smart Triggers, and take Others, search for the trigger When-New-Item Instance and put the following code into it :
+
+declare
+	x varchar2(25);
+begin
+	x:=:system.current_item;
+	if lower(x)='deptno' then
+		set_item_property('rggrp', enabled, property_true);
+	else
+		set_item_property('rggrp', enabled, property_false);
+	end if;
+end;
+
+
+OR
+
+declare
+x varchar2(25);
+begin
+	x:=:system.cursor_item;
+	if lower(x)='emp.deptno' then
+		set_item_property('rggrp', enabled, property_true);
+	else
+		set_item_property('rggrp', enabled, property_false);
+	end if;
+end;
+
+
+
+The above three triggers will ensure that the radio group is disabled by default and will become active only when the focus is on the DEPTNO item of EMP block.
+
+Go to the Radio Group RGGRP, right click, smart triggers, and take the trigger When-Radio-changed and put the following code :
+declare
+	x varchar2(25);
+begin
+	x:=:system.cursor_value;
+	:emp.deptno:=x;
+	go_block('emp');
+	go_item('deptno');
+end;
+
+
+
+
+Master-Details with Content and Stack canvas
+Create a new form module and save it as F16MasterDetailContentandStack. Thru data-block wizard and layout wizard create a data block for the DEPT table. Then create a Detailed block for EMP table ensuring that you have created a relationship with the DEPT block, and in the layout wizard take a "New Canvas" of type "Stacked". Name the DEPT block's canvas as DEPTCANVAS and the EMP block's canvas as EMPCANVAS.
+Save and Run the form, and you will be able to see the data, but only one canvas at a time.
+
+Hence, set the following properties of the EMPCANVAS(which are available only for a Stacked Canvas)
+Viewport X  position:0
+Viewport Y position:100
+Viewport Height:200
+Viewport Width :200
+Show Horizontal Scroll Bar : Yes
+Show Vertical Scroll Bar : Yes
+
+(Also, try the above with both the Canvasses as Stacked canvas, and setting the above properties for both of them)
+
+
+Create a control block, by clicking on Data Blocks under ON, click create(+), and select the option "Build a new data block manually". Give it the name CTRLBLOCK. In the CTRLBLOCK, create two items and set their Item-type property to "Push Button". Give these two buttons the names SHOW_BUTTON and HIDE_BUTTON and the labels SHOW and HIDE respectively. Set the canvas property of SHOW_BUTTON and HIDE_BUTTON to DEPTCANVAS and EMPCANVAS respectively. Adjust these buttons on their canvases to a suitable position.
+
+Write a When-Button-pressed trigger for the HIDE button and put the following code into it:
+SHOW_VIEW('DEPTCANVAS');
+HIDE_VIEW('EMPCANVAS');
+GO_BLOCK('DEPT');
+
+Write a When-Button-pressed trigger for the SHOW button and put the following code into it:
+SHOW_VIEW('EMPCANVAS');
+HIDE_VIEW('DEPTCANVAS');
+GO_BLOCK('EMP');
+
+Set the visible property=no for the EMPCANVAS
+
+Ensure that in the ON, the blocks are in the order DEPT, EMP, CTRLBLOCK respectively.
+
+Also, when at runtime, you click on >> to go to the next block while being in the EMP block or you click on << to go to the previous block while being in the DEPT block, then the control will actually move to the CTRLBLOCK, which may give some errors sometimes. Hence to avoid those errors set the "Keyborad Navigable" and "Mouse Navigate" properties of the SHOW_BUTTON and HIDE_BUTTON to NO.
+
+
+The below two will take care of the hiding/showing of data when you navigate through the Previous or Next block menu-buttons :
+Write a When-new-block trigger on EMP block having the following code :
+SHOW_VIEW('EMPCANVAS');
+HIDE_VIEW('DEPTCANVAS');
+
+Write a When-new-block trigger on DEPT block having the following code :
+SHOW_VIEW('DEPTCANVAS');
+HIDE_VIEW('EMPCANVAS');
+
+
+
+
+Master-Details with Content and Stack canvas with 1 button
+Create a new form module and save it as F17MasterDetailContentandStack. Thru data-block wizard and layout wizard create a data block for the DEPT table. Then create a Details block for EMP table ensuring that you have created a relationship with the DEPT block, and in the layout wizard take a "New Canvas" of type "Stacked". Name the DEPT block's canvas as DEPTCANVAS and the EMP block's canvas as EMPCANVAS. Save and Run the form, and you will be able to see the data, but only one canvas at a time.
+
+Create a control block, by clicking on Data Blocks under ON, click create(+), and select the option "Build a new data block manually". Give it the name CTRLBLOCK. In the CTRLBLOCK, create an item and set its Item-type property to "Push Button". Give it the name SHOWHIDE and the label as "SHOW" and Set the canvas propert of SHOWHIDE button to DEPTCANVAS Adjust this button on the DEPTCANVAS to a suitable position.
+
+Set the Viewport Y Position of EMPCANVAS to 120, and visible property to NO.
+
+
+Also, when at runtime, you click on >> to go to the next block while being in the EMP block or you click on << to go to the previous block while being in the DEPT block, then the control will actually move to the CTRLBLOCK, which may give some errors sometimes. Hence to avoid those errors set the "Keyborad Navigable" and "Mouse Navigate" properties of the SHOWHIDE button to NO.
+
+Write the following trigger for the When-Button-Pressed of the SHOWHIDE button :
+declare
+	itemid item;
+	labelval varchar2(20);
+begin
+	itemid:=find_item('ctrlblock.showhide');
+	labelval:=get_item_property(itemid, label);
+	
+	if labelval='SHOW' then
+		show_view('empcanvas');
+		go_block('emp');
+		set_item_property(itemid,label,'HIDE');
+	else
+		hide_view('empcanvas');
+		set_item_property(itemid,label,'SHOW');
+		go_block('dept');
+	end if;
+end;
+
+
+Write the following trigger for the Pre-Block of the DEPT block :
+set_item_property('showhide',label,'SHOW');
+hide_view('empcanvas');
+
+Write the following trigger for the Pre-Block of the EMP block :
+set_item_property('showhide',label,'HIDE');
+
+
+
+
+
+
+
+
+In the above module, even the following code would have worked for the When-Button-Pressed of the SHOWHIDE button, but then u will have to ensure that the focus remains on the push-button, for which u will have to set YES for Keyboard-navigable and mouse nvaigate properties or else  the current_item or cursor_item will return the name of the item on which the cursor was just before clicking on the push-button.
+DECLARE 
+	IT_ID Item;
+	y VARCHAR2(30); 
+	X VARCHAR2(30);
+ BEGIN 
+ 	Y:=:SYSTEM.Cursor_ITEM;
+ --	message(y);
+	IT_ID:=Find_Item(Y);
+	X:=get_item_property(IT_ID,label);
+	IF X='SHOW' THEN
+		SHOW_VIEW('EMPCANVAS');
+		 GO_BLOCK('EMP');
+  		Set_Item_Property(it_id,LABEL,'HIDE'); 
+	ELSIF X='HIDE' THEN
+		HIDE_VIEW('EMPCANVAS');
+		GO_BLOCK('DEPT');
+  		Set_Item_Property(it_id,LABEL,'SHOW'); 
+	END IF;	
+END;
+
+The SYSTEM.CURSOR_ITEM represents the name of the block and item, block.item, where the input focus (cursor) is located. 
+
+
+
+
+
+Master-Details with TAB canvas
+Create a new form module and save it as F18MasterDetailTABCANVAS. Thru data-block wizard create a data block for the DEPT table and in the layout wizard take Canvas type as "Tab", and the Tab Page will be automatically "New Tab Page", for the first page of a TAB canvas. Go thru the balance steps of the Layout wizard. Name the canvas as MYTABCANVAS. For the 1st page in the MYTABCANVAS, give the name=DEPTPAGE and Label=DEPT.
+
+Create a child block for the EMP table with appropriate relationship with the parent block. In the layout wizard, take the Canvas as MYTABCANVAS, and for Tab Page take the option "New Tab Page" and not the DEPTPAGE. For this new page, give the name=EMPPAGE and Label=EMP
+
+Now, the default labels for the two pages are DEPT and EMP, we want to change them at runtime, such that when you are in DEPTPAGE, the labels should be DEPARTMENT for DEPTPAGE and EMP for EMPPAGE, and when you are in EMPPAGE, the labels should be EMPLOYEE for EMPPAGE and DEPT for DEPTPAGE.
+
+To achieve the above, write the following triggers:
+
+
+At the form level, write the following code in the trigger When-Tab-Page-Changed
+DECLARE
+	tp_nm VARCHAR2(30);
+	tp_lb VARCHAR2(30);
+	tp_id TAB_PAGE;
+	tp_id1 TAB_PAGE;
+	tp_id2 TAB_PAGE;
+BEGIN
+	tp_id1:=FIND_TAB_PAGE('DEPTPAGE');
+	tp_id2:=FIND_TAB_PAGE('EMPPAGE');
+	tp_nm := GET_CANVAS_PROPERTY('MytabCANVAS', topmost_tab_page);
+	tp_id := FIND_TAB_PAGE(tp_nm);
+	tp_lb := GET_TAB_PAGE_PROPERTY(tp_id, label);
+	IF tp_lb = 'DEPT' THEN
+		SET_TAB_PAGE_PROPERTY(tp_id1, label, 'DEPARTMENT');
+		SET_TAB_PAGE_PROPERTY(tp_id2, label, 'EMP');
+		go_block('dept');
+	ELSIF tp_lb = 'EMP' THEN
+		SET_TAB_PAGE_PROPERTY(tp_id2, label, 'EMPLOYEE');
+	  	SET_TAB_PAGE_PROPERTY(tp_id1, label, 'DEPT');		
+	  	go_block('emp');
+	ELSE 
+		null;
+	END IF;
+END;
+
+
+At the DEPT block level, write the following code in the trigger Pre-Block
+DECLARE
+	tp_id1 TAB_PAGE;
+	tp_id2 TAB_PAGE;
+BEGIN
+	tp_id1:=FIND_TAB_PAGE('DEPTPAGE');
+	tp_id2:=FIND_TAB_PAGE('EMPPAGE');
+	SET_TAB_PAGE_PROPERTY(tp_id1, label, 'DEPARTMENT');
+	SET_TAB_PAGE_PROPERTY(tp_id2, label, 'EMP');
+END;
+
+At the EMP block level, write the following code in the trigger Pre-Block
+DECLARE
+	tp_id1 TAB_PAGE;
+	tp_id2 TAB_PAGE;
+BEGIN
+	tp_id1:=FIND_TAB_PAGE('DEPTPAGE');
+	tp_id2:=FIND_TAB_PAGE('EMPPAGE');
+	SET_TAB_PAGE_PROPERTY(tp_id1, label, 'DEPT');
+	SET_TAB_PAGE_PROPERTY(tp_id2, label, 'EMPLOYEE');
+END;
+
+
+
+
+
+
+
+WHERE clause
+Create a new form module and save it as F19WHERECLAUSE. Thru the data block wizard create a block for the EMP table and then go thru the layout wizard(tabular style). Name the canvas for EMP block as EMPCANVAS. Create 4 push buttons and set their name property as D10,D20,D30 and EXIT and their label as 10,20,30 and EXIT respectively. Hold the ctrl key and select all the 4 push buttons, press F4 function key to invoke the Proprty Pallete and set the canvas property to value EMPCANVAS
+
+In the ON, go to the EMP block, right click on Trigger, Smart Triggers, Others. From the list shown take the When-Button-Pressed trigger and put the following code into it :
+DECLARE
+X VARCHAR2(30);
+Y VARCHAR2(10);
+BEGIN
+clear_form;
+X:=:SYSTEM.TRIGGER_ITEM;
+Y:=GET_ITEM_PROPERTY(X,LABEL);
+--MESSAGE('DEPTNO='||Y);
+SET_BLOCK_PROPERTY('EMP',DEFAULT_WHERE,'DEPTNO='||Y);
+EXECUTE_QUERY;
+END;
+
+Also for the EXIT button, write a When-Button-Pressed trigger and put the following code into it :
+exit_form;
+
+At the form level, write the following code in the When-new-form-instance trigger, so that all the rows are shown when the form is first loaded :
+execute_query;
+
+Double click the EMPCANVAS, and adjust the 4 push buttons on the canvas. Since, in the layout wizard, you had taken the Table layout with 5 rows, all the push buttons will also be shown as a set of 5 buttons. Select all the buttons with the CTRL key pressed, press F4 and go the property pallete, and set the property "Number of Items Displayed"=1, so that all the buttons are shown only once.
+
+
+
+
+
+
+Check Box
+Create a new form module and save it as F20CHECKBOX. Thru the data block wizard create a block for the EMP table and then go thru the layout wizard. Name the canvas for EMP block as EMPCANVAS. Create a control block and name it as CTRLBLOCK. Add a check box item to the CTRLBLOCK, and set the following properties :
+name : check10
+label : 10
+value when checked :10
+value when unchecked :deptno
+canvas : empcanvas
+
+Adjust the checkbox on the EMPCANVAS
+
+Write the following code in the When-CheckBox-changed trigger for the check box check10
+
+Declare
+	lbl varchar2(10) := :system.CURSOR_value;
+begin
+	set_block_property('EMP', DEFAULT_WHERE, 'DEPTNO='||LBL);
+	GO_BLOCK('EMP');
+	EXECUTE_QUERY;
+END;
+
+
+
+
+
+ListBoxCumRadio
+Create a new form module and save it as F21ListCumRadio. Thru the data block wizard create a block for the EMP table and then go thru the layout wizard. Name the canvas for EMP block as EMPCANVAS. Create a control block and name it as CTRLBLOCK. Create a new item of type Radio Group in the CTRLBLOCK and name it as MYRADIO, and set its "Initial Value"=30. Under Myradio, create 3 Radio Buttons and name them as Radio10, Radio20, Radio30, and set their Label to 10,20,30 and Radio Button Value to 10,20,30 respectively.
+
+Write a When-Radio-Changed trigger for the Radio Group with the following code :
+Declare
+	lbl varchar2(10) := :system.CURSOR_value;
+begin
+	set_block_property('EMP', DEFAULT_WHERE, 'DEPTNO='||LBL);
+	GO_BLOCK('EMP');
+	EXECUTE_QUERY;
+END;
+
+In the CTRLBLOCK, add 2 list items, and set their names as DEPTPOPLIST and DEPTTLIST respectively, and set their LISTSTYLE as Poplist and Tlist respectively.  For both their "Elements in  List" property set the  "List Elements" as 10,20,30,All and the corresponding "List Item Value" as 10,20,30,deptno respectively. For the DEPTTLIST ensure that the height is sufficient enough or else sometimes it gives u problems with the default height.
+
+Write a When-List-Changed triggers for both DEPTPOPLIST and DEPTTLIST the  with the following code :
+Declare
+	lbl varchar2(10) := :system.CURSOR_value;
+begin
+	set_block_property('EMP', DEFAULT_WHERE, 'DEPTNO='||LBL);
+	GO_BLOCK('EMP');
+	EXECUTE_QUERY;
+END;
+
+Set the CANVAS property of the two list items and the Radio Group as EMPCANVAS. Open the EMPCANVAS and adjust the List Items and Radio Groups as required.
+
+Ensure that the EMP block is before the CTRLBLOCK in the ON
+
+
+
+
+
+
+Create a new form module and save it as F22LOVonBUTTON. Thru the data block wizard create a block for the EMP table and then go thru the layout wizard. Create a control block and name it as CTRLBLOCK. Add a push button item to the CTRLBLOCK and name it as SHOWLOV.
+
+Create a LOV with the query SELECT DEPTNO, DNAME FROM DEPT, and go thru the LOV wizard and attach the LOV to the item emp.deptno. Name the LOV as DEPTNOLOV and and it's RECORD GROUP as DEPTNORGRP, if required. 
+
+Write a When-Button-Pressed trigger for the SHOWLOV button and put the following code into it :
+DECLARE 
+	a_value_chosen BOOLEAN; 
+BEGIN 
+	a_value_chosen := Show_Lov('DEPTNOLOV'); 
+	IF NOT a_value_chosen THEN 
+		Message('You have not selected a value.'); 
+		RAISE Form_Trigger_Failure; 
+	END IF;
+END;
+
+
+For the EMP.DEPTNO item write a When-New-Item-Instance and put the following command(Builtin) into it :
+list_values;
+
+LIST_VALUES displays the list of values for the current item, as long as the input focus is in a text item that has an attached LOV. The list of values remains displayed until the operator dismisses the LOV or selects a value.
+
+Save and Run the form. Whenever control moves to the emp.deptno at runtime, the list_values will cause the LOV to be displayed. In addition, you can also use the SHOWLOV button to display the LOV.
+
+
+
+
+EDITOR
+Create a new form module and save it as F23EDITOR. Thru the data block wizard create a block for the EMP table and then go thru the layout wizard. Name the canvas as EMPCANVAS. In the EMP block, create 2 push buttons and name them as SHOWLOV and SHOWEDIT. Set their canvas=EMPCANVAS and Item type=Push Button. Set their names and labels both to SHOWLOV and SHOWEDIT respectively, and their "number of Items Displayed"=1, in case required. Adjust these buttons on the EMPCANVAS as required.
+
+Under ON, click Editor, and create(+) to create a new editor. Give it the name='MYEDITOR', Title=DESIGNATION, set other properties like Height=150, Width=150, x position=100, y position=100 and other properties like Foreground, Background colour, font, etc.
+
+Write the following code into the When-Button-Pressed trigger of the SHOWEDIT button
+
+DECLARE 
+	ed_id Editor; 
+ 	val VARCHAR2(3200); 
+ 	ed_ok BOOLEAN; 
+ BEGIN
+  	ed_id := Find_Editor('myeditor');
+ 	val := :emp.job; 
+ 	Show_Editor( ed_id, val, 10,14, val, ed_ok); 
+ 	IF ed_ok THEN 
+ 		:emp.job := val; 
+ 	END IF; 
+END;
+
+Create a LOV with the query SELECT DEPTNO, DNAME FROM DEPT, and go thru the LOV wizard and attach the LOV to the item emp.deptno. Name the LOV as DEPTNOLOV and and it's RECORD GROUP as DEPTNORGRP, if required. 
+
+
+
+Write the following code into the When-Button-Pressed trigger of the SHOWLOV button
+DECLARE 
+	a_value_chosen BOOLEAN; 
+BEGIN 
+	a_value_chosen := Show_Lov('DEPTNOLOV'); 
+	IF NOT a_value_chosen THEN 
+		Message('You have not selected a value.'); 
+		RAISE Form_Trigger_Failure; 
+	END IF; 
+END;
+
+
+
+
+
+
+CALCULATIONS
+Create a new form module and save it as F24CALCULATIONS. Thru the data block wizard create a block for the EMP table and then go thru the layout wizard. Name the canvas as EMPCANVAS. Under the EMP block, add a new item, give it name= TOTAL, canvas=empcanvas, database item=no, calculation mode=formula, formula=NVL(:EMP.SAL,0)+NVL(:EMP.COMM,0), datatype = number, maximum lenghth=9,prompt=TOTSALCOMM
+
+Open the EMPCANVAS, stretch its size , increase the width of the frame, move the scrollbar(if required). Adjust the TOTAL item and it's prompt as required on the canvas.
+
+Under the EMP block, add a new item, give it name=GRANDTOTAL, canvas=empcanvas, database item=no, calculation mode=summary, summary Function = sum, Summarized Block=emp, Summarized Item=TOTAL, datatype = number, maximum lenghth=9,prompt=GRANDSALCOMM 
+
+Set the "Query All Records"=Yes for the EMP data block or else you will get an error saying that :
+ Summarized control item(GRANDTOTAL) must reside in a control block, or in a block with Query All Records set to Yes. 
+
+
+Now, try the same,by placing the GranD total in a control block. The control blocks "Query All Records" can be NO and set it's Single Record=Yes, but the data block from where the summarized item is picking up data must have its "Query All Records"=yes
+
+Save the form and run it
+
+
+CALCULATIONSwithCONTROLBLOCK
+Do the same as above and save the module as F25CALCULATIONSCTRLBLCK, but create a control block and place the GRANDTOTAL summarized item in the control block. Set the "Query All Records"=Yes for the EMP data blcok , and let the Set the "Query All Records"=No for the control block and set the property Single Record =Yes
+
+
+
+
+
+
+LOVPRACTISE
+Create a new form module and save it as F26LOVPRACTISE. Thru the data block wizard create a block for the EMP table and then go thru the layout wizard. Name the canvas as EMPCANVAS.
+Create a Record Group by going to Record Groups, click creat(+), Static values, give the column names=MYJOBS and set the column values as CLERK, ANALYST, SALESMAN, MANAGER, PRESIDENT. name the record group as JOBRG
+
+Create another Record Group by going to Record Gropus, click creat(+), Based on query below(select * from dept), name the record group as DEPTNORG
+
+Under ON, go to LOVs, click create(+),Build a new LOV manually. Set the following properties
+Name : JOBLOV
+Title : List of Jobs
+Record Group :JOBRG
+Column properies : More, Column name : MYJOBS, Return Item for MYJOBS: emp.job
+
+Under ON, go to LOVs, clcik create(+),Build a new LOV manually. Set the following properties
+Name : DEPTNOLOV
+Title : List of Departments
+Record Group :DEPTNORG
+Column properies : More, Column name : deptno, dname, loc.  Return Item for deptno : emp.deptno
+
+For the items, JOB and DEPTNO in the EMP block set the property "List of values" to JOBLOV and DEPTNOLOV respectively
+
+At the EMP block level, write a New-Item-Instance trigger and put the following code into it :
+DECLARE
+	ITMNAME VARCHAR2(25);
+	a_value_chosen BOOLEAN; 
+BEGIN
+ ITMNAME:=:SYSTEM.CURRENT_ITEM;
+ IF ITMNAME='JOB' THEN
+ 	a_value_chosen := Show_Lov('JOBLOV'); 
+	IF NOT a_value_chosen THEN 
+		Message('You have not TAKEN A NEW  value.'); 
+	 
+	ELSE
+		Message('You have  TAKEN A NEW  value.'); 
+	END IF; 	
+ ELSIF ITMNAME='DEPTNO' THEN
+ 	a_value_chosen := Show_Lov('DEPTNOLOV'); 
+	IF NOT a_value_chosen THEN 
+		Message('You have not TAKEN A NEW  value.'); 
+	ELSE
+		Message('You have  TAKEN A NEW  value.'); 
+	END IF; 
+ END IF;
+END;
+
+
+
+Buttons Navigation
+Create a new form module and save it as F27BUTTONSNAVIGATION. Create a Data Block for the DEPT table, name the canvas as DEPTCANVAS, create a child data block for the EMP table on the same canvas.
+
+Under ON, click Canavas, and create a new canvas and name it as HORCANVAS, and its type as Horizontal Toolbar, Height=30
+
+
+Create a Control Block, name=CTRLBLOCK. In the control block, create 6 items, set their Item Type=Push Button, Canvas=HORCANVAS, Keyborad Navigable=No, Mouse Navigate=No. Set their names=PREVIOUS_BLOCK, NEXT_BLOCK, PREVIOUS_RECORD, NEXT_RECORD, FIRST_RECORD, LAST_RECORD and their labels=PREVIOUS BLOCK, NEXT BLOCK, PREVIOUS RECORD, NEXT RECORD, FIRST RECORD, LAST RECORD respectively. 
+
+For these 6 push buttons PREVIOUS_BLOCK, NEXT_BLOCK, PREVIOUS_RECORD, NEXT_RECORD, FIRST_RECORD, LAST_RECORD write the following code(Builts ins) in their When-Button-Pressed triggers respectively
+
+PREVIOUS_BLOCK;
+NEXT_BLOCK;
+PREVIOUS_RECORD;
+NEXT_RECORD;
+FIRST_RECORD;
+LAST_RECORD;
+
+Double click the HORCANVAS, and arrange the 6 push buttons on it.
+
+
+
+PLSQL Library Module
+Under ON, click PL/SQL Libraries. Save the module as F28PLSQL.
+Under ON, select Program Units, click create(+) to create a new Program Unit. Give the name as BONUS, take the TYPE as Function, and put the following code into it :
+
+FUNCTION bonus(sl number, co number, jb varchar2) RETURN number IS
+BEGIN
+  if jb='MANAGER' then
+  	return ( nvl(sl,0)+ nvl(co,0)+10000 );
+  elsif jb='CLERK' then
+    return ( nvl(sl,0)+ nvl(co,0)+5000 );
+  else
+  	return 5000;
+  end if;
+END;
+
+
+Under ON, select Program Units, click create(+) to create a new Program Unit. Give the name as CALCULATE_SAL, take the TYPE as Function, and put the following code into it :
+
+FUNCTION calculate_sal(sl in number, co in number) RETURN number IS
+BEGIN
+  return (nvl(sl,0)+nvl(co,0));
+END;
+
+Save the module and compile it to create a file F28PLSQL.plx.
+
+
+
+
+Using the PLSQL Library
+Create a new form module and save it as F29CALLLIB. Create a Data Block for the emp table thru the data-block and layout wizards, and name the canvas as EMPCANVAS.
+
+Under the EMP block, create 2 new items and set their names as "TOTAL" and "BONUS"  and their prompt as "TOTAL" and "BONUS"respectively, and set their property canvas=EMPCANVAS, Datatype=Number, Maximum Length=9, database Item=No
+
+
+Double click the EMPCANVAS, and arrange the items "TOTAL" and "BONUS" and their prompts in the frame, by stretching the canvas and frame as required.
+
+Under ON, click Attached Libraries, click create (+), and give the Library path as "C:\Hemant\F28PLSQL.pll. Click the ATTACH button, it will give you an Alert saying Remove Path?, click No. If you click Yes, then you need to change the default.env file.
+
+At the Form level, write a Post-Query Trigger and put the following code into it :
+:emp.total:=calculate_sal(:emp.sal,:emp.comm);
+:emp.bonus:=bonus(:emp.sal,:emp.comm,:emp.job);
+
+Also, for the Post-text-item(or more better when-validate-item) of emp.sal, emp.comm and emp.job items put the following code :
+:emp.total:=calculate_sal(:emp.sal,:emp.comm);
+:emp.bonus:=bonus(:emp.sal,:emp.comm,:emp.job);
+
+Now, if u run the form, you get an error saying that the PLSQL library could not be attached. This is because the library file is in the folder C:\hemant, and this path is not set to the environment variable FORMS_PATH
+
+Hence the following entry needs to be made in the default.env file in the <ORACLE_HOME>\forms\server, i.e, C:\DevSuiteHome_1\forms\server path
+Here, search the FORMS_PATH. It will have the following value, by default :
+
+FORMS_PATH=C:\DevSuiteHome_1\forms
+
+Change it to the following to also include the path where our F28PLSQL exists :
+FORMS_PATH=C:\DevSuiteHome_1\forms;C:\Hemant
+
+Close the Form-builder and restart the OC4J instance after making the above changes. And you may be required to reattach the plsql library again
+
+Now, compile and run the form again.
+
+
+
+
+Under ON, Click Menus, click Create(+), save this Menu Module as F30MYMENU
+
+Under F30MYMENU, click Menus, Click create(+), name it as MAINMENU. 
+Under MAINMENU, click Items, click create(+) to create 3 new items. Set the following properties for these Items
+Name : ACTION
+Label : Action
+Comand Type : Menu
+
+
+Name : EDIT
+Label : Edit
+Comand Type : Menu
+
+
+Name : QUERY
+Label : Query
+Comand Type : Menu
+
+
+Under F30MYMENU, click Menus, CliCk create(+), name it as ACTIONMENU. 
+Under ACTIONMENU, click Items, click create(+) to create 2 new items. Set the following properties for these Items
+Name : SAVE
+Label : Save
+Comand Type : PL/SQL
+
+
+Name : EXIT
+Label : Exit
+Comand Type : PL/SQL
+
+Under ACTIONMENU, for the Item SAVE, under Menu Item Code, write the following code :
+if :system.form_status='CHANGED' then
+commit_form;
+end if;
+
+Under ACTIONMENU, for the Item EXIT, under Menu Item Code, write the following code :
+exit_form;
+
+
+Under F30MYMENU, click Menus, Click create(+), name it as EDITMENU. 
+Under EDITMENU, click Items, click create(+) to create 4 new items. Set the following properties for these Items
+Name : CUT
+Label : Cut
+Comand Type : PL/SQL
+Menu Item Type : Magic
+Magic Item : Cut
+
+
+Name : COPY
+Label : Copy
+Comand Type : PL/SQL
+Menu Item Type : Magic
+Magic Item : Copy
+
+
+Name : SEPARATOR
+Comand Type : PL/SQL
+Menu Item Type : Separator
+
+
+Name : PASTE
+Label : Paste
+Comand Type : PL/SQL
+Menu Item Type : Magic
+Magic Item : Paste
+
+
+Under F30MYMENU, click Menus, Click create(+), name it as QUERYMENU. 
+Under QUERYMENU, click Items, click create(+) to create 3 new items. Set the following properties for these Items
+Name : ENTER
+Label : Enter
+Comand Type : PL/SQL
+Menu item code : enter_query;
+
+
+Name : EXECUTE
+Label : Execute
+Comand Type : PL/SQL
+Menu item code : execute_query;
+
+Name : CANCEL
+Label : Cancel
+Comand Type : PL/SQL
+Menu item code : abort_query;
+
+
+Under MAINMENU, for the items ACTION, EDIT, QUERY set the SubMenu name as ACTIONMENU, EDITMENU, QUERYMENU respectively
+
+In ON, under Menus, arrange the menus in the order MAINMENU, ACTIONMENU, EDITMENU, QUERYMENU
+
+Compile the module to create the mmx.
+
+
+
+Use of F30MYMENU
+Open the Form module F29CALLLIB and save it as F31USEMYMENU. If required(in case of error at the time of opening the F29CALLLIB.fmb), attach the PLSQL library F28PLSQL.pll.
+
+Click on the form module F31USEMYMENU, and set the 
+Menu Module = C:\Hemant\F30MYMENU 
+instead of the default value(DEFAULT&SMARTBAR)
+
+Save and Run.
+
+
+
+
+
+Under ON, click Popup Menus, click create(+), and set the name=MYPOPUPMENU.
+
+Under MYPOPUPMENU, click items and add 3 items, and set the following properties
+Name : EXIT
+Label : Exit
+For Menu Item Code, write the following code :
+Exit_form;
+
+Name : EXECUTE
+Label : Execute
+For Menu Item Code, write the following code :
+execute_query;
+
+Name : EDIT
+Label : EDIT
+Command Type : Menu
+
+Under ON, click Popup Menus, click create(+), and set the name=EDITMENU.
+
+Under EDITMENU, click items and add 4 items, and set the following properties
+Name : CUT
+Label : Cut
+Menu Item Code : cut_region;
+
+Name : COPY
+Label : Copy
+Menu Item Code : copy_region;
+
+Name : SEPARATOR
+Menu Item Type : Separator
+
+Name : PASTE
+Label : Paste
+Menu Item Code : paste_region;
+
+Under MYPOPUPMENU, go to the item EDIT and set the following property :
+Submenu Name : EDITMENU
+
+For the EMPCANVAS set Popup Menu=MYPOPUPMENU
+
+
+Use of Alerts
+Create a new form module and save it as F32Alerts. Create a data block using the EMP table thru the Data Block and Layout Wizard. Name the canvas as EMPCANVAS. In the EMP block, create two items of type Push Button and set their Canvas=EMPCANVAS. Set the following properties for the 2 buttons :
+Name : SAVE
+Label : Save
+
+Name : EXIT
+Label : Exit
+
+Double click the EMPCANVAS, and arrange the two Push Butons on the canvas as required. Set their property, "Number of Items Displayed"=1, if required.
+
+Under ON, click Alerts, click create(+) to create 2 New Alerts and set the following properties :
+Name : SAVEALERT
+Title : SAVE ???
+Message : DO YOU WANT TO SAVE?
+
+
+Name : EXITALERT
+Title : EXIT ???
+Message : DO YOU WANT TO EXIT?
+
+For the Push Buttons SAVE and EXIT, write the following code in the When-Button-Pressed triggers respectively :
+
+DECLARE
+	B NUMBER;
+BEGIN
+	B:=SHOW_ALERT('SAVEALERT');
+	IF B=ALERT_BUTTON1 THEN
+		COMMIT_FORM;
+	ELSE
+		MESSAGE('HELLO NOT SAVING NOW');
+		
+	END IF;
+END;
+
+
+DECLARE
+	B NUMBER;
+BEGIN
+	B:=SHOW_ALERT('EXITALERT');
+	IF B=ALERT_BUTTON1 THEN
+		EXIT_FORM;
+	ELSE
+		MESSAGE('HELLO NOT EXITING NOW');
+
+	END IF;
+END;
+
+
+
+
+
+
+NEW_FORM, CALL_FORM, OPEN_FORM
+Create a new form module and save it as F33ECHILD. Create a data block named EMP using the EMP table thru the Data Block and Layout Wizard. Name the canvas as EMPCANVAS. Under ON,Go to Parameter, click create and set the name =pdno, parameter data type=number, parameter initial value=20.
+At the form level, write the following code into the When-new-form-instance trigger
+
+DECLARE
+	X NUMBER;
+BEGIN
+	X:=:PARAMETER.PDNO;
+	SET_BLOCK_PROPERTY('EMP', DEFAULT_WHERE,'DEPTNO='||X);
+	GO_BLOCK('EMP');
+	EXECUTE_QUERY;
+END;
+
+
+Create a new form module and save it as F34DMAST. Create a data block using the DEPT table thru the Data Block and Layout Wizard. Name the canvas as DEPTCANVAS. In the DEPT data block, create 3 new items and set their property Item type=Push Button, canvas=DEPTCANVAS, Name=NEWFORM, CALLFORM, OPENFORM    Label=NEWFORM, CALLFORM, OPENFORM respectively. Double click the DEPTCANVAS and arrange the 3 Push buttons on it as required.
+
+Write the following code, into the When-Button-Pressed trigger of the Push Buttons :
+
+
+NEWFORM
+DECLARE
+	X PARAMLIST;
+BEGIN
+	X:=CREATE_PARAMETER_LIST('abc');
+	ADD_PARAMETER(X,'PDNO',TEXT_PARAMETER,:DEPT.DEPTNO);
+	NEW_FORM('C:\Hemant\F33ECHILD.FMX',FULL_ROLLBACK,QUERY_ONLY,X);
+--Here, the parameter list need not be destroyed, as anyways you are not going to come back to the Parent form, 
+--as the parent form gets terminated when the the New Form is called using the NEW_FORM built in procedure.
+--IF NOT ID_NULL(X) THEN
+--	DESTROY_PARAMETER_LIST(X);
+--END IF;
+END;
+
+
+CALLFORM
+DECLARE
+	X PARAMLIST;
+BEGIN
+	X:=CREATE_PARAMETER_LIST('ooo');
+	ADD_PARAMETER(X,'PDNO',TEXT_PARAMETER,:DEPT.DEPTNO);
+	CALL_FORM('C:\Hemant\F33ECHILD.FMX',NO_HIDE,DO_REPLACE,QUERY_ONLY,X);
+--Here, the parameter list need to be destroyed as when you exit the child form the control will come back to the Parent form, and it needs to have 
+--a fresh parameter list
+	IF NOT ID_NULL(X) THEN
+		DESTROY_PARAMETER_LIST(X);
+	END IF;
+END;
+
+
+OPENFORM
+DECLARE
+	X PARAMLIST;
+BEGIN
+	X:=CREATE_PARAMETER_LIST('vvv');
+	ADD_PARAMETER(X,'PDNO',TEXT_PARAMETER,:DEPT.DEPTNO);
+	OPEN_FORM('C:\Hemant\F33ECHILD.FMX',NO_ACTIVATE,NO_SESSION,X);
+--Here, the parameter list need to be destroyed as when you exit the child form the control will come back to the Parent form, and it needs to have 
+--a fresh parameter list
+	IF NOT ID_NULL(X) THEN
+		DESTROY_PARAMETER_LIST(X);
+	END IF;
+END;
+
+Save the form, compile it and run
+
+
+Thus, in NEW_FORM, the Parent form is terminated once the child form is called, you cannot resume the Parent Form
+
+In CALL_FORM, the Parent form is not terminated when the child form is called, but the parent form is in a sort of disabled/inactive state while the child form is active. The parent form becomes enabled/active only after the child form is exited.
+
+In OPEN_FORM, the Parent form is not terminated when the child form is called, but the parent form is still in a active state and you can continue to work with it and open more instances of the child form using the OPENFORM button, while the other child forms are active. 
